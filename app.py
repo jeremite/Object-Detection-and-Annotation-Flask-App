@@ -44,8 +44,12 @@ def main_interface():
     print("shapre is ",img_arr.shape)
     # do object detection in inference function.
     results = inference(img_arr, conf_thresh=0.5, max_suppression_thresh=0.4)
-    print(results)
 
+    is_ladder=1
+    if not results['results']:
+        is_ladder=0
+    results['is_ladder']=is_ladder
+    print(results)
     return jsonify(results)
 
 @app.route('/save', methods=["POST"])

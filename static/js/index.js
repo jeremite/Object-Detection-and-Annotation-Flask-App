@@ -85,6 +85,13 @@ function communicate(img_base64_url) {
     dataType: "json"
   }).done(function(response_data) {
       console.log("send back successfullly")
+      let is_ladder = parseInt(response_data.is_ladder)
+      if(is_ladder==1){
+        document.getElementById("res").innerHTML='Ladder in the image? <b style="color:red">YES</b>'
+      }else{
+        document.getElementById("res").innerHTML='Ladder in the image? <b style="color:red">NO</b>'
+      }
+
       drawResult(response_data.results);
   });
 }
@@ -286,6 +293,7 @@ function save() {
          console.log("save success");
          console.log("return are:"+JSON.parse(data['num_f']))
          document.getElementById("number").innerHTML=JSON.parse(data['num_f']);
+         alert("save success");
         //$( ".sortable" ).sortable( "refresh" );
        },
     error: function(err) {
