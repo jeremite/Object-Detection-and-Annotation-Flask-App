@@ -11,6 +11,7 @@ var ctx = canvas.getContext('2d');
 var rect = {};
 var drag = false;
 var guides = false;
+var if_drag = false;
 var imageObj = null;
 var if_has = false;
 var cur_rects = []
@@ -136,6 +137,8 @@ function clickUploader() {
   canvas.removeEventListener('mousedown', mouseDown, false);
   canvas.removeEventListener('mouseup', mouseUp, false);
   canvas.removeEventListener('keydown', keyDown,false);
+  // set the hint to click not Satisfied
+  document.getElementById("guides").innerHTML='Hit <b style="color:red">"Not Satisfied"</b> and draw rectangle on above image to create new data';
 }
 
 // draw results on image.
@@ -171,10 +174,13 @@ function drawResult(results) {
 function draw(){
   console.log("clear canvas and rects");
   cur_rects = [];
+  guides = false;
+  console.log("recs are: "+cur_rects);
+  document.getElementById("guides").innerHTML= 'Hit the key <b style="color:red">"w"</b> to get guidelines'
   ctx.clearRect(0, 0, canvas.width,canvas.height);
   ctx.drawImage(image, 0, 0);
 
-  canvas.addEventListener('keydown', keyDown,false);
+  window.addEventListener('keydown', keyDown,false);
   canvas.addEventListener('mousemove', mouseMove, false);
   canvas.addEventListener('mousedown', mouseDown, false);
   canvas.addEventListener('mouseup', mouseUp, false);
@@ -198,17 +204,23 @@ function mouseDown(e) {
 function mouseUp() {
   drag = false;
   guides = false;
-  cur_rects.push([rect.startX, rect.startY, rect.w, rect.h])
+  console.log(if_drag+" "+rect.w+" "+rect.h+" "+Math.abs(rect.w));
+  if(if_drag && Math.abs(rect.w)>10 && Math.abs(rect.h)>10){ //if_drag is to avoid push values just by click the canvas; the rest twos is to avoid small rectangeles
+      cur_rects.push([rect.startX, rect.startY, rect.w, rect.h])
+  }
+  if_drag=false;
+  console.log("recs in mouseup are: "+cur_rects);
+
 }
 
 function mouseMove(e) {
-    console.log("guides is "+guides)
     if(guides){
         const x =e.pageX - this.offsetLeft;
         const y = e.pageY - this.offsetTop;
         const { height, width } = canvas;
         ctx.clearRect(0, 0, width, height);
         ctx.drawImage(image, 0, 0);
+        console.log("recs in guides are: "+cur_rects);
         for (r of cur_rects){
           ctx.strokeRect(r[0],r[1],r[2],r[3]);
         }
@@ -223,6 +235,7 @@ function mouseMove(e) {
     }
     if (drag) {
         ctx.drawImage(image, 0, 0);
+        console.log("recs in drag are: "+cur_rects);
         for (r of cur_rects){
           ctx.strokeRect(r[0],r[1],r[2],r[3]);
         }
@@ -233,6 +246,7 @@ function mouseMove(e) {
         ctx.strokeRect(rect.startX, rect.startY, rect.w, rect.h);
         ctx.fillStyle = "rgb(255,0,0,0.5)"//"blue";
         ctx.fillRect(rect.startX, rect.startY, rect.w, rect.h);
+        if_drag = true;
 
     }
 }
