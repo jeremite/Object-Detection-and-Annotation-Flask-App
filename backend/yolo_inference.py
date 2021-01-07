@@ -5,7 +5,7 @@ import numpy as np
 
 #PATH_TO_CKPT = 'models/ssdlite_mobilenet_v2.pb'
 PATH_TO_CONFIG = 'backend/model_config/ladder/ladder_yolov4.cfg'
-PATH_TO_WEIGTHS = 'backend/model_config/ladder/ladder_yolov4_best.weights'
+PATH_TO_WEIGTHS = 'backend/model_config/ladder/ladder_yolov4_best_0106.weights'
 def load_model():
     yolo_model = cv2.dnn.readNetFromDarknet(PATH_TO_CONFIG,PATH_TO_WEIGTHS)
     return yolo_model

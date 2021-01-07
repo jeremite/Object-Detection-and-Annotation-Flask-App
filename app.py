@@ -4,7 +4,7 @@ import numpy as np
 import base64
 import io
 import os
-#import cv2
+import cv2
 from backend.yolo_inference import load_model, inference
 
 os.environ['CUDA_VISIBLE_DEVICES'] = '0'
@@ -37,11 +37,12 @@ def main_interface():
 
     # convert to numpy array.
     global img_arr
-    img_arr = np.array(img)
+    #img_arr = np.array(img)
 
-    #session['img_arr'] = img_arr
 
+    im1 = img.save("test.jpg")
     print("shapre is ",img_arr.shape)
+    img_arr = cv2.imread("test.jpg")
     # do object detection in inference function.
     results = inference(img_arr, conf_thresh=0.5, max_suppression_thresh=0.4)
 

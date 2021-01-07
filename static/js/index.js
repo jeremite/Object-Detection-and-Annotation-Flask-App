@@ -98,6 +98,22 @@ function communicate(img_base64_url) {
 
 // handle image files uploaded by user, send it to server, then draw the result.
 function parseFiles(files) {
+  // set the drag and guids event to false
+  drag=false;
+  guides = false;
+  canvas.removeEventListener('mousemove', mouseMove, false);
+  canvas.removeEventListener('mousedown', mouseDown, false);
+  canvas.removeEventListener('mouseup', mouseUp, false);
+  canvas.removeEventListener('keydown', keyDown,false);
+  guides=false;
+  drag=false;
+  cur_rects=[];
+  console.log("new image")
+  // set the hint to click not Satisfied
+  document.getElementById("guides").innerHTML='Hit <b style="color:red">"Not Satisfied"</b> and draw rectangle on above image to create new data';
+
+
+
   const file = files[0];
   filename = file.name;
   console.log("file name is:"+filename);
@@ -137,16 +153,7 @@ function handleFiles() {
 // callback fuction of button.
 function clickUploader() {
   fileInput.click();
-  // set the drag and guids event to false
-  drag=false;
-  guides = false;
-  canvas.removeEventListener('mousemove', mouseMove, false);
-  canvas.removeEventListener('mousedown', mouseDown, false);
-  canvas.removeEventListener('mouseup', mouseUp, false);
-  canvas.removeEventListener('keydown', keyDown,false);
-  // set the hint to click not Satisfied
-  document.getElementById("guides").innerHTML='Hit <b style="color:red">"Not Satisfied"</b> and draw rectangle on above image to create new data';
-}
+  }
 
 // draw results on image.
 function drawResult(results) {
