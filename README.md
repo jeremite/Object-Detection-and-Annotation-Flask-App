@@ -11,3 +11,5 @@
 2. If not satified with the result, click "not satisfied" and trigger the annotation tool to draw bounding boxes youself.
 3. Hit "w" to activate the drawing guide lines.
 ![](ob_2.png)
+
+4. When the preset threshold of the number of new data has been hit, the model will be triggered to continual training.
