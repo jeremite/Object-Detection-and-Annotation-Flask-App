@@ -7,4 +7,4 @@ A web app that detects ladders in pictures with trained YOLO V4 and also allows 
 
 2. If not satified with the result, click "not satisfied" and trigger the annotation tool to draw bounding boxes youself.
 3. Hit "w" to activate the drawing guide lines.
-![](pb_2.png)
+![](ob_2.png)
