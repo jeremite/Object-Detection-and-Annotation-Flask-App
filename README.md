@@ -3,6 +3,8 @@ A web app that detects ladders in pictures with trained YOLO V4 and also allows 
 
 # Usage
 1. upload an iamge, the object will be drew a bounding box (you could use other trained algorithm to realize other objec detection)
+![](ob_1.png)
 
 2. If not satified with the result, click "not satisfied" and trigger the annotation tool to draw bounding boxes youself.
 3. Hit "w" to activate the drawing guide lines.
+![](pb_2.png)
