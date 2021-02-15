@@ -10,9 +10,12 @@ from backend.yolo_inference import load_model, inference
 os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 
 app = Flask(__name__)
-app.config['DEBUG']=True
+app.config['DEBUG']=False
 app.config['SECRET_KEY']='secret'
 img_arr = np.array([])
+path = "backend/model_config/ladder/images/"
+path_config = "D:\WM\Project\ladder\yolov4\darknet\images"
+threhold = 20
 #print("cur dir is",os.getcwd())
 
 @app.route('/')
@@ -65,11 +68,13 @@ def save():
     write_new_data(filename,coordinates,w,h)
     # caculate new data number
     num_f = get_newData_cnt()
+    #if num_f >= threhold:
+        #write_new_config()
     print('num_f new is ',num_f)
     return jsonify({"num_f":num_f})
 
+
 def write_new_data(filename,co,w,h):
-    path = "backend/model_config/ladder/images/"
     im = Image.fromarray(img_arr)
     im.save(os.path.join(path,filename))
     #cv2.imwrite(os.path.join(path,filename), img_arr)
