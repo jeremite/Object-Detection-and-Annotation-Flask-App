@@ -1,0 +1,5 @@
+classes=1
+train=images/ladder/2021-01-11_14_17/ladder_training.txt
+valid=images/ladder/2021-01-11_14_17/ladder_testing.txt
+names=images/ladder/2021-01-11_14_17/2021-01-11_14_17.names
+backup=images/ladder/2021-01-11_14_17/backup/
